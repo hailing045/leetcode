@@ -1,0 +1,38 @@
+class Solution {
+    public int romanToInt(String s) {
+        int result = 0;
+        char[] ch = new char[s.length()];
+        int difference = 0;
+        int prevDifference = 0;
+        for(int i = 0; i< s.length() ; i++){
+            ch[i] = s.charAt(i);
+            
+            if((ch[i]=='I')){difference = 1;}
+            else if((ch[i]=='V')){difference= 5;}
+            else if((ch[i]=='X')){difference= 10;}
+            else if((ch[i]=='L')){difference= 50;}
+            else if((ch[i]=='C')){difference= 100;}
+            else if((ch[i]=='D')){difference= 500;}
+            else if((ch[i]=='M')){difference= 1000;}
+            else return 0;
+            
+            if(prevDifference == 1 && difference ==5 ||difference ==10 ){
+                result = result + difference -prevDifference*2;
+            }
+            else if(prevDifference == 10 && difference ==50 ||difference ==100 ){
+                result = result + difference-prevDifference*2;
+            }
+            else if(prevDifference == 100 && difference ==500 ||difference ==1000){
+                result = result + difference-prevDifference*2;
+            }
+            else result = result + difference;
+            
+            prevDifference  = difference;
+            
+    }
+        
+        return result;
+    }
+}
+
+//not yet working for case "MCMXCIV"
